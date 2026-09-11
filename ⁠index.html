@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تشغيل الكاميرا</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        video {
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>بث الكاميرا المباشر</h2>
+    <!-- عنصر الفيديو لعرض الكاميرا -->
+    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+
+    <script>
+        // الوصول إلى عنصر الفيديو
+        const video = document.getElementById('webcam');
+
+        // طلب إذن الوصول إلى الكاميرا من المستخدم
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(function(stream) {
+                // ربط بث الكاميرا بعنصر الفيديو
+                video.srcObject = stream;
+            })
+            .catch(function(error) {
+                console.error("حدث خطأ أثناء الوصول إلى الكاميرا: ", error);
+                alert("يرجى السماح بالوصول إلى الكاميرا لتشغيل الكود.");
+            });
+    </script>
+
+</body>
+</html>
